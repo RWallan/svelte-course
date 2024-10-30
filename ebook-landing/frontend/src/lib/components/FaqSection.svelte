@@ -3,7 +3,7 @@
   import mastodonIcon from "$assets/icons/mastodon.svg";
 </script>
 
-<section class="faq-section">
+<section class="landing-page-section">
   <h2 class="mb-l">Frequently Asked Questions</h2>
   <div class="faq-container">
     <FaqItem></FaqItem>
@@ -22,3 +22,21 @@
     </a>
   </div>
 </section>
+
+<style>
+  .additional-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: grey;
+  }
+
+  .mastodon-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+</style>
