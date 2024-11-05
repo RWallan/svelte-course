@@ -8,7 +8,7 @@
   <div class="faq-container">
     <FaqItem></FaqItem>
   </div>
-  <div class="additional-info">
+  <div class="additional-info mt-m">
     <Button class="mt-s">BUY NOW</Button>
     <p class="mt-m">Any of other questions?</p>
     <a href="https://bolha.us/@rwallan">
