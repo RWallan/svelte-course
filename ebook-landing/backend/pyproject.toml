@@ -7,8 +7,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-fastapi = "^0.115.4"
+fastapi = {extras = ["standard"], version = "^0.115.4"}
 stripe = "^11.2.0"
+pydantic-settings = "^2.6.1"
 
 
 [tool.poetry.group.dev.dependencies]
