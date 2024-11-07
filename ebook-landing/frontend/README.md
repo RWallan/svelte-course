@@ -16,6 +16,13 @@ npx sv create my-app
 
 ## Developing
 
+You'll need a `.env` file with:
+
+```
+PUBLIC_STRIPE_KEY=
+PUBLIC_FRONTEND_URL=http://localhost:5173
+```
+
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash

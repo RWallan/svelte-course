@@ -1,5 +1,12 @@
 # Ebook Landing Page - API
 
+To run this project, create a `.env` file with:
+
+```
+STRIPE_API_KEY=""
+PRICE_ID=""
+```
+
 To run the API you'll need to install the dependencies with Poetry:
 
 ```bash
