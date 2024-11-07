@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, SectionHeadline } from "$components";
+  import { Button, ExperienceTable, SectionHeadline } from "$components";
   import profile from "$assets/profile.jpg";
   import { goto } from "$app/navigation";
 </script>
@@ -40,6 +40,8 @@
       >
     </div>
   </div>
+
+  <ExperienceTable />
 </section>
 
 <style>
