@@ -17,10 +17,8 @@
       <p>
         I've had the opportunity to work with diverse datasets and tackle
         complex problems, developing my expertise in data manipulation,
-        statistical modeling, and machine learning. Currently, I apply my skills
-        at ScientifiCloud, where I dive into Python, R, and tools like
-        LangChain, FastAPI, ScikitLearn, BigQuery and other databases to bring
-        insights and innovative solutions to life.
+        statistical modeling, machine learning and Large Language Models
+        applications.
       </p>
       <p>
         Beyond coding, I value clear communication and collaboration. I thrive
@@ -35,7 +33,7 @@
       </p>
 
       <Button
-        className="mt-m"
+        className="mt-s"
         onclick={() => {
           goto("/#contact-form");
         }}>Tell me about your project!</Button
@@ -43,3 +41,22 @@
     </div>
   </div>
 </section>
+
+<style>
+  .content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+
+  .image {
+    width: 42%;
+    border-radius: 20px;
+    object-fit: cover;
+  }
+
+  .text {
+    width: 55%;
+    text-align: left;
+  }
+</style>
