@@ -7,7 +7,7 @@
   <h3>Hello, I'm Richard</h3>
   <div class="underscore mb-m"></div>
   <h1>I'm a Data Scientist uncovering insights and building</h1>
-  <h1 class="dark-red">data-driven solutions.</h1>
+  <h1 class="dark-red mb-m">data-driven solutions.</h1>
 
   <Button
     onclick={() => {
