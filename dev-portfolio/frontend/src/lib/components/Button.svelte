@@ -18,7 +18,7 @@
   .btn {
     font-family: "Lato", sans-serif;
     font-weight: 500;
-    background-color: #242d4e;
+    background-color: black;
     color: whitesmoke;
     font-size: 24px;
     padding: 14px 40px;
