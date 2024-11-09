@@ -48,11 +48,11 @@ type SanityProject = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name?: string;
-  company?: string;
-  slug?: string;
-  image?: {
-    asset?: {
+  name: string;
+  company: string;
+  slug: string;
+  image: {
+    asset: {
       _ref: string;
       _type: "reference";
       _weak?: boolean;
@@ -62,10 +62,10 @@ type SanityProject = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  dateAccomplished?: string;
-  content?: Array<RawTextContent | RawImageContent>;
-  stack?: Array<string>;
-  url?: string;
+  dateAccomplished: string;
+  content: Array<RawTextContent | RawImageContent>;
+  stack: Array<string>;
+  url: string;
 };
 
 interface ProcessedTextContent {
