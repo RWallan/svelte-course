@@ -23,7 +23,7 @@
       <p>
         Beyond coding, I value clear communication and collaboration. I thrive
         on making complex data accessible and actionable, crafting everything
-        from insightful reports to dynamic dashboards with Svelte. With hands-on
+        from insightful reports to dynamic dashboards and systems. With hands-on
         experience across sectors, I'm here to translate data into strategic,
         real-world insights that drive results.
       </p>
