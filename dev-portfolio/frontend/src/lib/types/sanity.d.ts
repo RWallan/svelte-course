@@ -92,6 +92,6 @@ interface ProcessedProject {
 
 interface Skill {
   name: string;
-  iconClass: string;
+  icon: string;
   _key: string;
 }
