@@ -32,7 +32,7 @@
         <li>{skill}</li>
       {/each}
       <h3 class="semi-bold mt-m">Project URL</h3>
-      <a href={projectUrl} class="underline">See the project</a>
+      <a href={projectUrl} class="semi-bold">See the project</a>
     </div>
     <div class="project-text">
       {#each content as block}
@@ -47,3 +47,38 @@
     </div>
   </div>
 </main>
+
+<style>
+  .work-page {
+    padding-top: 80px;
+    padding-bottom: 140px;
+  }
+
+  .project-image {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+  }
+
+  .content-image {
+    width: 100%;
+  }
+
+  .project-container {
+    display: flex;
+  }
+
+  .metadata {
+    min-width: 200px;
+  }
+  a {
+    text-decoration: underline;
+    text-decoration-color: #8e2d55;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: #8e2d55;
+      color: #8e2d55;
+    }
+  }
+</style>
