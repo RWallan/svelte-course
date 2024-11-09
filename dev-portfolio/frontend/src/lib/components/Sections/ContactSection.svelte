@@ -1,19 +1,53 @@
 <script lang="ts">
   import { Button, SectionHeadline } from "$components";
 
+  let contactName = $state("");
+  let contactEmail = $state("");
+  let informationAboutProject = $state("");
+  let isFormInvalid = $state(false);
+
   const onSubmit = (event: Event) => {
     event.preventDefault();
+
+    if (contactEmail && contactName && informationAboutProject) {
+      // send data
+    } else {
+      isFormInvalid = true;
+    }
     console.log(event);
   };
+
+  $effect(() => {
+    if (contactEmail || contactName || informationAboutProject) {
+      isFormInvalid = false;
+    }
+  });
 </script>
 
 <section class="mt-l">
   <SectionHeadline sectionName="contact-form">Let's Talk</SectionHeadline>
   <div class="form-container default-margin mt-m">
     <form>
-      <input type="text" class="text-input mb-m" placeholder="Your Name" />
-      <input type="text" class="text-input mb-m" placeholder="Your Email" />
-      <textarea placeholder="Tell me what's up."></textarea>
+      <input
+        type="text"
+        class="text-input mb-m"
+        class:input-error={isFormInvalid && !Boolean(contactName.length)}
+        placeholder="Your Name"
+        bind:value={contactName}
+      />
+      <input
+        type="text"
+        class="text-input mb-m"
+        class:input-error={isFormInvalid && !Boolean(contactEmail.length)}
+        placeholder="Your Email"
+        bind:value={contactEmail}
+      />
+      <textarea
+        placeholder="Tell me what's up."
+        class:input-error={isFormInvalid &&
+          !Boolean(informationAboutProject.length)}
+        bind:value={informationAboutProject}
+      ></textarea>
       <Button onclick={onSubmit}>Submit</Button>
     </form>
     <div class="form-text">
@@ -86,9 +120,10 @@
 
   .input-error {
     background-color: rgba(223, 87, 87, 0.667);
+    color: white;
   }
 
-  .input-error-placeholder {
+  .input-error::placeholder {
     color: white;
   }
 
