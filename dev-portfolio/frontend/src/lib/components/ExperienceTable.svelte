@@ -15,9 +15,9 @@
           <div class="company-and-date">
             <p>{job.company}</p>
             <p class="dark-grey">
-              {job.startDate}
+              {job.startDate.slice(0, 7)}
               {#if job.endDate}
-                / {job.endDate}
+                / {job.endDate.slice(0, 7)}
               {:else}
                 / present
               {/if}
