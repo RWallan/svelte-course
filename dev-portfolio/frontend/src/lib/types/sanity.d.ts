@@ -89,3 +89,9 @@ interface ProcessedProject {
   content: Array<ProcessedTextContent | ProcessedImageContent>;
   projectUrl: string;
 }
+
+interface Skill {
+  name: string;
+  iconClass: string;
+  _key: string;
+}
