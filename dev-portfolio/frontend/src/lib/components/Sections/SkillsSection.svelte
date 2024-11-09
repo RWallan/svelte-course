@@ -6,7 +6,6 @@
   }
 
   let { skills }: SkillsSectionProps = $props();
-  $inspect(skills[0].icon);
 </script>
 
 <section class="mt-l">
