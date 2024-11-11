@@ -1,17 +1,17 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
 
-    interface ButtonProps {
-        children: Snippet,
-        onclick: ((e: MouseEvent) => void) | (() => void);
-        className?: string;
-    }
+  interface ButtonProps {
+    children: Snippet;
+    onclick: ((e: MouseEvent) => void) | (() => void);
+    className?: string;
+  }
 
   let { className, children, ...props }: ButtonProps = $props();
 </script>
 
 <button class={`btn ${className}`} {...props}>
-    {@render children()}
+  {@render children()}
 </button>
 
 <style>
@@ -23,5 +23,10 @@
     font-size: 24px;
     padding: 14px 40px;
     border-radius: 10px;
+  }
+
+  .nav-bar {
+    padding: 10px 24px;
+    font-size: 20px;
   }
 </style>
