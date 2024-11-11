@@ -5,16 +5,33 @@
   let contactEmail = $state("");
   let informationAboutProject = $state("");
   let isFormInvalid = $state(false);
+  let isEmailSent = $state(false);
+  let showErrorMessage = $state(false);
+  let isLoading = $state(false);
 
-  const onSubmit = (event: Event) => {
+  const onSubmit = async (event: Event) => {
     event.preventDefault();
 
     if (contactEmail && contactName && informationAboutProject) {
-      // send data
+      isLoading = true;
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        body: JSON.stringify({
+          contactName,
+          contactEmail,
+          informationAboutProject,
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
+      isLoading = false;
+      if (response.ok) {
+        isEmailSent = true;
+      } else {
+        showErrorMessage = true;
+      }
     } else {
       isFormInvalid = true;
     }
-    console.log(event);
   };
 
   $effect(() => {
@@ -27,29 +44,50 @@
 <section class="mt-l">
   <SectionHeadline sectionName="contact-form">Let's Talk</SectionHeadline>
   <div class="form-container default-margin mt-m">
-    <form>
-      <input
-        type="text"
-        class="text-input mb-m"
-        class:input-error={isFormInvalid && !Boolean(contactName.length)}
-        placeholder="Your Name"
-        bind:value={contactName}
-      />
-      <input
-        type="text"
-        class="text-input mb-m"
-        class:input-error={isFormInvalid && !Boolean(contactEmail.length)}
-        placeholder="Your Email"
-        bind:value={contactEmail}
-      />
-      <textarea
-        placeholder="Tell me what's up."
-        class:input-error={isFormInvalid &&
-          !Boolean(informationAboutProject.length)}
-        bind:value={informationAboutProject}
-      ></textarea>
-      <Button onclick={onSubmit}>Submit</Button>
-    </form>
+    {#if isEmailSent}
+      <div class="spinner-container">
+        <h3>
+          Thank you for getting in contact with me. I'll usally reply within 24
+          hours.
+        </h3>
+      </div>
+    {:else if isLoading}
+      <div class="spinner-container">
+        <div class="spinner"></div>
+        <h3>Sending off the contact form.</h3>
+      </div>
+    {:else if showErrorMessage}
+      <h3>
+        We seem to have trouble with our server in the moment. Please send me an
+        email directly to <a href="mailto:coding.rwallan@gmail.com" class="link"
+          >coding.rwallan@gmail.com</a
+        >
+      </h3>
+    {:else}
+      <form>
+        <input
+          type="text"
+          class="text-input mb-m"
+          class:input-error={isFormInvalid && !Boolean(contactName.length)}
+          placeholder="Your Name"
+          bind:value={contactName}
+        />
+        <input
+          type="text"
+          class="text-input mb-m"
+          class:input-error={isFormInvalid && !Boolean(contactEmail.length)}
+          placeholder="Your Email"
+          bind:value={contactEmail}
+        />
+        <textarea
+          placeholder="Tell me what's up."
+          class:input-error={isFormInvalid &&
+            !Boolean(informationAboutProject.length)}
+          bind:value={informationAboutProject}
+        ></textarea>
+        <Button onclick={onSubmit}>Submit</Button>
+      </form>
+    {/if}
     <div class="form-text">
       <h3 class="bold mb-s">Let's create a connection</h3>
       <p>
