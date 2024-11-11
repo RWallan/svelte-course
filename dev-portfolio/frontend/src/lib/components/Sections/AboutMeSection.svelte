@@ -42,7 +42,7 @@
         className="mt-s"
         onclick={() => {
           goto("/#contact-form");
-        }}>Tell me about your project!</Button
+        }}>Let’s create a connection!</Button
       >
     </div>
   </div>
