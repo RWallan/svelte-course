@@ -6,4 +6,5 @@ export { default as SkillsSection } from "./Sections/SkillsSection.svelte";
 
 export { default as Button } from "./Button.svelte";
 export { default as ExperienceTable } from "./ExperienceTable.svelte";
+export { default as Header } from "./Header.svelte";
 export { default as SectionHeadline } from "./SectionHeadline.svelte";
