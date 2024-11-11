@@ -4,7 +4,7 @@
 </script>
 
 <nav class="default-margin navbar">
-  <a href="'/" class="logo">RW</a>
+  <a href="/" class="logo">RW</a>
   <div class="navbar-links">
     <a href="/#about-me" class="nav-link">About Me</a>
     <a href="/#my-work" class="nav-link">Work</a>
