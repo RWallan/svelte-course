@@ -9,8 +9,10 @@
       <a href="https://github.com/RWallan" target="_blank" class="footer-link"
         ><i class="devicon-github-original"></i></a
       >
-      <a href="https://linkedin.com/RWallan" target="_blank" class="footer-link"
-        ><i class="devicon-linkedin-plain"></i></a
+      <a
+        href="https://linkedin.com/in/richardwallan"
+        target="_blank"
+        class="footer-link"><i class="devicon-linkedin-plain"></i></a
       >
       <a href="https://bolha.us/@rwallan" target="_blank" class="footer-link">
         <img src={mastodon} alt="Mastodon" /></a
