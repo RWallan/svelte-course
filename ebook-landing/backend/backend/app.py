@@ -1,12 +1,10 @@
-import base64
 from http import HTTPStatus
 
-import httpx
 import stripe
 from fastapi import Body, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail, Attachment
+from sendgrid.helpers.mail import Mail
 
 from backend.schemas import CheckoutInput, SessionOutput
 from backend.settings import settings
