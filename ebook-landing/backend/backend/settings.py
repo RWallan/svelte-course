@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     PRICE_ID: str
     SENDGRID_API_KEY: str
     ALLOW_ORIGIN: str
+    STRIPE_WEBHOOK_SECRET: str
 
 
 settings = Settings()
