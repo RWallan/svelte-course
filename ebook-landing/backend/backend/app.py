@@ -2,7 +2,7 @@ from http import HTTPStatus
 from typing import Annotated
 
 import stripe
-from fastapi import Body, FastAPI, HTTPException, Header
+from fastapi import Body, FastAPI, Header
 from fastapi.middleware.cors import CORSMiddleware
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
@@ -43,17 +43,16 @@ def checkout(checkout: CheckoutInput):
 
 
 @app.post('/purchase_confirmation')
-def purchase_confirmation(payload: dict = Body(None), stripe_signature: Annotated[str | None, Header()] = None):
-    try:
-        stripe_event = stripe.Webhook.construct_event(payload, stripe_signature, settings.STRIPE_WEBHOOK_SECRET)
-        customer_details = stripe_event['data']['object']['customer_details']
-        customer_email = customer_details['email']
-        customer_name = customer_details['name']
-    except stripe.SignatureVerificationError:
-        raise HTTPException(
-            status_code=HTTPStatus.BAD_REQUEST,
-            detail='Webhook signature verification failed.'
-        )
+def purchase_confirmation(
+    payload: dict = Body(None),
+    stripe_signature: Annotated[str | None, Header()] = None,
+):
+    stripe_event = stripe.Webhook.construct_event(
+        payload, stripe_signature, settings.STRIPE_WEBHOOK_SECRET
+    )
+    customer_details = stripe_event['data']['object']['customer_details']
+    customer_email = customer_details['email']
+    customer_name = customer_details['name']
 
     message = Mail(
         from_email='coding.rwallan@gmail.com',
