@@ -45,7 +45,6 @@ def checkout(checkout: CheckoutInput):
 
 @app.post('/purchase_confirmation')
 def purchase_confirmation(payload: dict = Body(None)):
-    pdf = httpx.get('https://narrify-public.s3.eu-central-1.amazonaws.com/sample.pdf').content
     customer_details = payload['data']['object']['customer_details']
     customer_email = customer_details['email']
     customer_name = customer_details['name']
@@ -65,6 +64,7 @@ def purchase_confirmation(payload: dict = Body(None)):
             </ul>
             <p>Thank you once again for choosing our guide. We wish you the best of luck on your journey to Spain!</p>
             <p>Best regards,<br/>Richard Wallan</p>
+            <p>Here's your link: <a href="https://narrify-public.s3.eu-central-1.amazonaws.com/sample.pdf" target="_blank">Digital Ebook - Spain Relocation</a></p>
         """,
     )
 
