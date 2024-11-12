@@ -46,12 +46,6 @@ def checkout(checkout: CheckoutInput):
 @app.post('/purchase_confirmation')
 def purchase_confirmation(payload: dict = Body(None)):
     pdf = httpx.get('https://narrify-public.s3.eu-central-1.amazonaws.com/sample.pdf').content
-    attachment = Attachment(
-        file_name='Digital Ebook - Spain Relocation.pdf',
-        file_type='application/pdf',
-        disposition='attachment',
-        file_content=str(base64.b64encode(pdf))
-    )
     customer_details = payload['data']['object']['customer_details']
     customer_email = customer_details['email']
     customer_name = customer_details['name']
@@ -73,7 +67,6 @@ def purchase_confirmation(payload: dict = Body(None)):
             <p>Best regards,<br/>Richard Wallan</p>
         """,
     )
-    message.add_attachment(attachment)
 
     sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
     _ = sg.send(message)
