@@ -45,6 +45,7 @@ def checkout(checkout: CheckoutInput):
 
 @app.post('/purchase_confirmation')
 def purchase_confirmation(payload: dict = Body(None)):
+    print(payload)
     pdf = httpx.get('https://narrify-public.s3.eu-central-1.amazonaws.com/sample.pdf').content
     attachment = Attachment(
         file_name='Digital Ebook - Spain Relocation.pdf',
