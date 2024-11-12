@@ -50,7 +50,7 @@ def purchase_confirmation(payload: dict = Body(None)):
         file_name='Digital Ebook - Spain Relocation.pdf',
         file_type='application/pdf',
         disposition='attachment',
-        file_content=base64.b64encode(pdf)
+        file_content=str(base64.b64encode(pdf))
     )
     customer_details = payload['data']['object']['customer_details']
     customer_email = customer_details['email']
