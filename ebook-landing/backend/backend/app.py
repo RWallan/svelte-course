@@ -47,6 +47,7 @@ def purchase_confirmation(
     payload: dict = Body(None),
     stripe_signature: Annotated[str | None, Header()] = None,
 ):
+    print(stripe_signature)
     stripe_event = stripe.Webhook.construct_event(
         payload, stripe_signature, settings.STRIPE_WEBHOOK_SECRET
     )
