@@ -2,7 +2,7 @@ from http import HTTPStatus
 from typing import Annotated
 
 import stripe
-from fastapi import Body, FastAPI, Header
+from fastapi import FastAPI, Header, Request
 from fastapi.middleware.cors import CORSMiddleware
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
@@ -43,11 +43,12 @@ def checkout(checkout: CheckoutInput):
 
 
 @app.post('/purchase_confirmation')
-def purchase_confirmation(
-    payload: dict = Body(None),
+async def purchase_confirmation(
+    request: Request,
     stripe_signature: Annotated[str | None, Header()] = None,
 ):
-    print(stripe_signature)
+    payload = await request.body()
+
     stripe_event = stripe.Webhook.construct_event(
         payload, stripe_signature, settings.STRIPE_WEBHOOK_SECRET
     )
