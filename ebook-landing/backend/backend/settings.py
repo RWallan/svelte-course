@@ -8,6 +8,8 @@ class Settings(BaseSettings):
 
     STRIPE_API_KEY: str
     PRICE_ID: str
+    SENDGRID_API_KEY: str
+    ALLOW_ORIGIN: str
 
 
 settings = Settings()

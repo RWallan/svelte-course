@@ -14,7 +14,7 @@ session = stripe.checkout.Session(api_key=settings.STRIPE_API_KEY)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['http://localhost:5173'],
+    allow_origins=[settings.ALLOW_ORIGIN],
     allow_methods=['*'],
     allow_headers=['*'],
 )
