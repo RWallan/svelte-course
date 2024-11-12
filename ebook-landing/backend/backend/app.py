@@ -43,7 +43,7 @@ def checkout(checkout: CheckoutInput):
     return SessionOutput(session_id=created_session.id)
 
 
-@app.webhooks.post('/purchase_confirmation')
+@app.post('/purchase_confirmation')
 def purchase_confirmation(payload: dict = Body(None)):
     pdf = httpx.get('https://narrify-public.s3.eu-central-1.amazonaws.com/sample.pdf').content
     attachment = Attachment(
