@@ -58,7 +58,7 @@ def purchase_confirmation(payload: dict = Body(None)):
 
     message = Mail(
         from_email='coding.rwallan@gmail.com',
-        to_email=customer_email,
+        to_emails=customer_email,
         subject='Your Purchase Confirmation - Complete Spain Relocation Guide',
         html_content=f"""<h1>Thank You for Your Purchase!</h1>
             <p>Dear {customer_name},</p>
