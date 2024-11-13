@@ -51,6 +51,14 @@
 {/if}
 
 <style>
+  a {
+    display: block;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
   .btn {
     padding: 12px 24px;
     min-width: 230px;
