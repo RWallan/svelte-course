@@ -1,5 +1,6 @@
 <script lang="ts">
   import { AuthForm } from "$components";
+  let { form } = $props();
 </script>
 
-<AuthForm />
+<AuthForm isRegistration={false} {form} />
