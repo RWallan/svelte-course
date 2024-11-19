@@ -1,14 +1,12 @@
-import type { Actions } from "./$types";
-import { createClient } from "@supabase/supabase-js";
-import {
-  PUBLIC_SUPABASE_URL,
-  PUBLIC_SUPABASE_ANON_KEY,
-} from "$env/static/public";
 import { fail, redirect } from "@sveltejs/kit";
 
 interface RegisterReturnObject {
   success: boolean;
   errors: string[];
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirmation: string;
 }
 
 export const actions = {
@@ -21,6 +19,10 @@ export const actions = {
 
     const returnObject: RegisterReturnObject = {
       success: true,
+      email,
+      name,
+      password,
+      passwordConfirmation,
       errors: [],
     };
 
@@ -55,7 +57,7 @@ export const actions = {
     if (error || !data.user) {
       console.log("The ir an error");
       console.log(error);
-      returnObject.success = true;
+      returnObject.success = false;
       return fail(400, returnObject as any);
     }
 
