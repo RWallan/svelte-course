@@ -1,4 +1,5 @@
 import { fail, redirect } from "@sveltejs/kit";
+import { PUBLIC_FRONTEND_URL } from "$env/static/public";
 
 interface ReturnObject {
   success: boolean;
@@ -46,5 +47,19 @@ export const actions = {
     }
 
     redirect(303, "/private/dashboard");
+  },
+  googleLogin: async ({ locals: { supabase } }) => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${PUBLIC_FRONTEND_URL}/auth/callback`,
+      },
+    });
+
+    if (error) {
+      return fail(400, { message: "Something went wrong with Google login" });
+    }
+
+    redirect(303, data.url);
   },
 };
