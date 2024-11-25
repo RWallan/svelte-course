@@ -117,6 +117,15 @@ export class UserState {
     return mostCommonGenre || null;
   }
 
+  getBookByGenre(genre: string) {
+    return this.allBooks
+      .filter((book) => book.genre?.includes(genre))
+      .toSorted((a, z) => {
+        const zRating = z.rating || 0;
+        const aRating = a.rating || 0;
+        return zRating - aRating;
+      });
+  }
   async logout() {
     await this.supabase?.auth.signOut();
     goto("/login");
