@@ -1,4 +1,7 @@
 import type { Actions } from './$types';
+import { createClient } from '@supabase/supabase-js';
+import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public';
+import { fail, redirect } from '@sveltejs/kit';
 
 interface ReturnObject {
 	success: boolean;
@@ -41,7 +44,18 @@ export const actions: Actions = {
 		}
 
 		// Registration flow;
+		const supabase = createClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY);
+		const { data, error } = await supabase.auth.signUp({
+			email,
+			password
+		});
 
-		return returnObject;
+		if (error || !data.user) {
+			console.log('There was an error signing up: ', error);
+			returnObject.success = true;
+			return fail(400, returnObject as any);
+		}
+
+		redirect(303, '/private/dashboard');
 	}
 };
