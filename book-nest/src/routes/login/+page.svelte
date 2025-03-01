@@ -1,6 +1,7 @@
 <script>
 	import { AuthForm } from '$components';
+
+	let { form } = $props();
 </script>
 
-<!--Should input form here later-->
-<AuthForm isRegistration={false} />
+<AuthForm isRegistration={false} {form} />
