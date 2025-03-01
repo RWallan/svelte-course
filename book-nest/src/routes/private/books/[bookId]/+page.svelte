@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Button, StarRating } from '$components';
-	import type { Book } from '$lib/state/user-state.svelte';
+	import { getUserState, type Book } from '$lib/state/user-state.svelte';
 	import Icon from '@iconify/svelte';
 
 	interface BookPageProps {
@@ -9,32 +9,59 @@
 		};
 	}
 	let { data }: BookPageProps = $props();
-	let { book } = $derived(data);
+	let userContext = getUserState();
+	let book = $derived(userContext.getBookById(data.book.id) || data.book);
 	let isEditMode = $state(false);
 
-	// svelte-ignore state_referenced_locally
-	let title = $state(book.title);
-	// svelte-ignore state_referenced_locally
-	let author = $state(book.author);
-	// svelte-ignore state_referenced_locally
-	let description = $state(book.description || '');
-	// svelte-ignore state_referenced_locally
-	let genre = $state(book.genre || '');
+	let title = $state(data.book.title);
+	let author = $state(data.book.author);
+	let description = $state(data.book.description || '');
+	let genre = $state(data.book.genre || '');
 
 	const goBack = () => {
 		history.back();
 	};
 
-	const toogleEditMode = () => {
+	const toogleEditModeAndSaveToDatabase = async () => {
+		if (isEditMode) {
+			await userContext.updateBook(book.id, {
+				title,
+				author,
+				description,
+				genre
+			});
+		}
+
 		isEditMode = !isEditMode;
 	};
+
+	const updateReadingStatus = async () => {
+		const hasStatusReading = Boolean(book.started_reading_on);
+		const currentTimestamp = new Date().toISOString();
+
+		if (hasStatusReading) {
+			await userContext.updateBook(book.id, { finished_reading_on: currentTimestamp });
+		} else {
+			await userContext.updateBook(book.id, { started_reading_on: currentTimestamp });
+		}
+	};
+
+	const updateDatabaseRating = async (newRating: number) => {
+		await userContext.updateBook(book.id, { rating: newRating });
+	};
 </script>
+
+{#snippet updateStatus()}
+	<Button isSecondary={Boolean(book.started_reading_on)} onclick={updateReadingStatus}>
+		{book.started_reading_on ? 'I finished reading this book' : 'I started reading this book'}
+	</Button>
+{/snippet}
 
 {#snippet bookInfo()}
 	<h2 class="book-title mt-m">{book.title}</h2>
 	<p class="book-author">by {book.author}</p>
 	<h4 class="mt-m mb-xs semi-bold">Your rating</h4>
-	<StarRating value={book.rating || 0} />
+	<StarRating value={book.rating || 0} {updateDatabaseRating} />
 	<p class="small-font">Click to {book.rating ? 'change' : 'give'} rating</p>
 	{#if book.description}
 		<h4 class="mt-m mb-xs semi-bold">Description</h4>
@@ -46,9 +73,7 @@
 		</button>
 	{/if}
 	{#if !book.finished_reading_on}
-		<Button isSecondary={true} onclick={() => console.log('updating reading status')}>
-			{book.started_reading_on ? 'I finished reading this book' : 'I started reading this book'}
-		</Button>
+		{@render updateStatus()}
 	{/if}
 	{#if book.genre}
 		<h4 class="mt-m mb-xs semi-bold">Genre</h4>
@@ -64,14 +89,17 @@
 			<input type="text" class="input" bind:value={author} name="title" />
 		</div>
 		<h4 class="mt-m mb-xs semi-bold">Your rating</h4>
-		<StarRating value={book.rating || 0} />
+		<StarRating value={book.rating || 0} {updateDatabaseRating} />
 		<p class="small-font">Click to {book.rating ? 'change' : 'give'} rating</p>
 		<h4 class="mt-m mb-xs semi-bold">Description</h4>
-		<textarea name="description" class="textarea mb-m" placeholder="Add a description"></textarea>
+		<textarea
+			name="description"
+			class="textarea mb-m"
+			placeholder="Add a description"
+			bind:value={description}
+		></textarea>
 		{#if !book.finished_reading_on}
-			<Button isSecondary={true} onclick={() => console.log('updating reading status')}>
-				{book.started_reading_on ? 'I finished reading this book' : 'I started reading this book'}
-			</Button>
+			{@render updateStatus()}
 		{/if}
 		<h4 class="mt-m mb-xs semi-bold">Genre</h4>
 		<input class="input" bind:value={genre} type="text" name="genre" />
@@ -90,7 +118,7 @@
 				{@render bookInfo()}
 			{/if}
 			<div class="button-container mt-m">
-				<Button isSecondary={true} onclick={toogleEditMode}
+				<Button isSecondary={true} onclick={toogleEditModeAndSaveToDatabase}
 					>{isEditMode ? 'Save changes' : 'Edit'}</Button
 				>
 				<Button isDanger={true} onclick={() => console.log('delete the book')}
