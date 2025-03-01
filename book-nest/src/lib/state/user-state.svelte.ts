@@ -145,6 +145,25 @@ export class UserState {
 		}
 	}
 
+	async uploadBookCover(id: number, file: File) {
+		if (!this.user || !this.supabase) return;
+
+		const filePath = `${this.user.id}/${new Date().getTime()}_${file.name}`;
+		const { error: uploadError } = await this.supabase.storage
+			.from('book-cover')
+			.upload(filePath, file);
+
+		if (uploadError) {
+			console.log('Some error happened uploading the cover', uploadError);
+			return;
+		}
+
+		const {
+			data: { publicUrl }
+		} = this.supabase.storage.from('book-cover').getPublicUrl(filePath);
+
+		await this.updateBook(id, { cover_image: publicUrl });
+	}
 	getBookById(id: number) {
 		return this.allBooks.find((book) => book.id === id);
 	}
