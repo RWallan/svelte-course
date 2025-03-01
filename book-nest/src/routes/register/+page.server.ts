@@ -4,6 +4,10 @@ import { fail, redirect } from '@sveltejs/kit';
 interface ReturnObject {
 	success: boolean;
 	errors: string[];
+	name: string;
+	email: string;
+	password: string;
+	passwordConfirmation: string;
 }
 
 export const actions: Actions = {
@@ -16,6 +20,10 @@ export const actions: Actions = {
 
 		const returnObject: ReturnObject = {
 			success: true,
+			email,
+			name,
+			password,
+			passwordConfirmation,
 			errors: []
 		};
 
