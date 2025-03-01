@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BookCard } from '$components';
+	import { BookCategory } from '$components';
 	import { getUserState } from '$lib/state/user-state.svelte';
 	import Icon from '@iconify/svelte';
 
@@ -22,9 +22,7 @@
 		</div>
 	</div>
 
-	{#each allBooks as book}
-		<BookCard {book} />
-	{/each}
+	<BookCategory books={allBooks.slice(0, 10)} categoryName="Your favorite books" />
 </div>
 
 <style>
