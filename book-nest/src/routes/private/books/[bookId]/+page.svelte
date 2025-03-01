@@ -41,7 +41,7 @@
 		<p class="mb-m">{book.description}</p>
 	{:else}
 		<h4 class="mt-m mb-xs semi-bold">No description yet</h4>
-		<button class="block-mb-m" onclick={() => console.log('toogle on the edit mode')}>
+		<button class="block mb-m" onclick={() => console.log('toogle on the edit mode')}>
 			<p>Click to add one.</p>
 		</button>
 	{/if}
