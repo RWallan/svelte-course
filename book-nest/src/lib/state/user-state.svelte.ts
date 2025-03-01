@@ -106,8 +106,21 @@ export class UserState {
 		);
 
 		return mostCommonGenre || null;
+		return mostCommonGenre || '';
 	}
 
+	getBooksFromFavoriteGenre() {
+		if (!this.allBooks.length) return [];
+		const mostCommonGenre = this.getFavoriteGenre();
+
+		return this.allBooks
+			.filter((book) => book.genre?.includes(mostCommonGenre))
+			.toSorted((a, z) => {
+				const ratingA = a.rating || 0;
+				const ratingZ = z.rating || 0;
+				return ratingZ - ratingA;
+			});
+	}
 	async logout() {
 		await this.supabase?.auth.signOut();
 		goto('/');
