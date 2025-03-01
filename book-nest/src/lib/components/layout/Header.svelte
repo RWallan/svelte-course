@@ -9,7 +9,9 @@
 </script>
 
 <header>
-	<a href="/"><img src={bookNestLogo} alt="Go to home" class="logo" /></a>
+	<a href={user ? '/private/dashboard' : '/'}
+		><img src={bookNestLogo} alt="Go to home" class="logo" /></a
+	>
 	<nav>
 		{#if !user}
 			<ul>
