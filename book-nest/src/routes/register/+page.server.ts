@@ -49,7 +49,7 @@ export const actions: Actions = {
 
 		if (error || !data.user) {
 			console.log('There was an error signing up: ', error);
-			returnObject.success = true;
+			returnObject.success = false;
 			return fail(400, returnObject as any);
 		}
 
