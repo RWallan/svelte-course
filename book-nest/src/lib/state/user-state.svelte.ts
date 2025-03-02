@@ -237,6 +237,26 @@ export class UserState {
 			console.log('Failed to update account:', error);
 		}
 	}
+
+	async deleteAccount() {
+		if (!this.session) return;
+
+		try {
+			const response = await fetch('/api/delete-account', {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${this.session.access_token}`
+				}
+			});
+
+			if (response.ok) {
+				await this.logout();
+			}
+		} catch (error) {
+			console.log('Failed to delete account:', error);
+		}
+	}
 }
 
 const USER_STATE_KEY = Symbol('USER_STATE');
