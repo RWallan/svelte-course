@@ -89,7 +89,7 @@ export class UserState {
 	}
 
 	getFavoriteGenre() {
-		if (!this.allBooks.length) return '';
+		if (this.allBooks.filter((book) => book.genre).length === 0) return '';
 		const genreCounts: { [key: string]: number } = {};
 
 		this.allBooks.forEach((book) => {
