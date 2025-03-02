@@ -54,7 +54,7 @@ export class UserState {
 		const userId = this.user.id;
 
 		const [booksResponse, userNamesResponse] = await Promise.all([
-			await this.supabase.from('books').select('*').eq('user_id', userId),
+			this.supabase.from('books').select('*').eq('user_id', userId),
 			this.supabase.from('user_names').select('name').eq('user_id', userId).single()
 		]);
 
