@@ -213,6 +213,30 @@ export class UserState {
 		await this.supabase?.auth.signOut();
 		goto('/');
 	}
+
+	async updateAccountData(email: string, userName: string) {
+		if (!this.session) return;
+
+		try {
+			const response = await fetch('/api/update-account', {
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${this.session.access_token}`
+				},
+				body: JSON.stringify({
+					email,
+					userName
+				})
+			});
+
+			if (response.ok) {
+				this.userName = userName;
+			}
+		} catch (error) {
+			console.log('Failed to update account:', error);
+		}
+	}
 }
 
 const USER_STATE_KEY = Symbol('USER_STATE');
