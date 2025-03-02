@@ -39,7 +39,7 @@
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		width: 100%;
+		width: 360px;
 		min-width: 360px;
 		max-width: 450px;
 		height: 300px;
